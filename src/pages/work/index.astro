@@ -1,0 +1,90 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Marquee from '../../components/Marquee.astro';
+import NetlifyContact from '../../components/NetlifyContact.astro';
+import { getProjects } from '../../lib/sanity';
+
+const projects = await getProjects();
+// Extract unique categories
+const categories = ['All', ...new Set(projects.map(p => p.category).filter(Boolean))];
+---
+
+<Layout 
+  title="Work — Arik Andersson" 
+  description="My latest web design projects and case studies. See how we can help bring your ideas to life."
+  activePage="work"
+>
+  <!-- Work Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-title">Work</h1>
+      <p class="page-subtitle">
+        My latest web design projects and see how we can help bring your ideas to life.
+      </p>
+
+      <div class="filter-pills" id="work-filters">
+        {categories.map((cat, idx) => (
+          <button 
+            class={`filter-pill ${idx === 0 ? 'active' : ''}`} 
+            data-filter={cat === 'All' ? 'all' : cat}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+  </header>
+
+  <!-- Work Grid -->
+  <main class="container">
+    <div class="work-grid" id="work-grid" style="padding-bottom: 100px;">
+      {projects.map((project) => (
+        <a 
+          href={`/work/${project.slug}`} 
+          class="work-item" 
+          data-category={project.category}
+          style="text-decoration: none; color: inherit;"
+        >
+          <div class="work-image-box">
+            <img src={project.mainImage} alt={`${project.title} project showcase`} loading="lazy" />
+          </div>
+          <div class="work-meta">
+            <h4 class="work-name">{project.title}</h4>
+            <span class="work-category">{project.category}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+
+  <!-- Marquee Ticker -->
+  <Marquee />
+
+  <!-- Big Call to Action & Netlify Contact Form -->
+  <NetlifyContact />
+</Layout>
+
+<script>
+  // Filter pill interaction
+  const pills = document.querySelectorAll('#work-filters .filter-pill');
+  const items = document.querySelectorAll('#work-grid .work-item');
+
+  pills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      pills.forEach((p) => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      const filter = pill.getAttribute('data-filter');
+
+      items.forEach((item) => {
+        const itemEl = item as HTMLElement;
+        const category = itemEl.getAttribute('data-category');
+        if (filter === 'all' || category === filter) {
+          itemEl.style.display = 'flex';
+        } else {
+          itemEl.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

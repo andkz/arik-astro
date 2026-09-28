@@ -1,0 +1,157 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Marquee from '../../components/Marquee.astro';
+import NetlifyContact from '../../components/NetlifyContact.astro';
+import { getProjects } from '../../lib/sanity';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project, index) => {
+    const prevProject = index > 0 ? projects[index - 1] : projects[projects.length - 1];
+    const nextProject = index < projects.length - 1 ? projects[index + 1] : projects[0];
+    return {
+      params: { slug: project.slug },
+      props: { project, prevProject, nextProject },
+    };
+  });
+}
+
+const { project, prevProject, nextProject } = Astro.props;
+---
+
+<Layout 
+  title={`${project.title} — Case Study by Arik Andersson`}
+  description={project.excerpt || `Case study and design details for ${project.title}.`}
+  activePage="work"
+>
+  <main class="container">
+    <!-- Detail Header -->
+    <header class="detail-header">
+      <a href="/work" class="back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>BACK TO WORK</span>
+      </a>
+
+      <div class="detail-badge-row">
+        <span class="detail-badge">{project.category}</span>
+        <span class="detail-meta-text">{project.year || '2024'}</span>
+      </div>
+
+      <h1 class="detail-title">{project.title}</h1>
+      <p class="detail-excerpt">{project.excerpt}</p>
+
+      <!-- Project Metadata Grid -->
+      <div class="project-meta-grid">
+        <div class="meta-item">
+          <span class="meta-label">Client</span>
+          <span class="meta-value">{project.client || 'Confidential'}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Year</span>
+          <span class="meta-value">{project.year || '2024'}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Role</span>
+          <span class="meta-value">{project.role || 'Design & Development'}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Duration</span>
+          <span class="meta-value">{project.duration || '3 Weeks'}</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Showcase Image -->
+    <div class="showcase-image-box">
+      <img 
+        src={project.mainImage} 
+        alt={`${project.title} showcase overview`} 
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+
+    <!-- Case Study Narrative Body -->
+    <article class="case-study-body">
+      {project.overview && (
+        <section class="case-block">
+          <span class="case-block-label">01 / Overview</span>
+          <h2 class="case-block-heading">Project Overview &amp; Goals</h2>
+          <p class="case-block-text">{project.overview}</p>
+        </section>
+      )}
+
+      {project.challenge && (
+        <section class="case-block">
+          <span class="case-block-label">02 / The Challenge</span>
+          <h2 class="case-block-heading">Solving Complex User Problems</h2>
+          <p class="case-block-text">{project.challenge}</p>
+        </section>
+      )}
+
+      {project.solution && (
+        <section class="case-block">
+          <span class="case-block-label">03 / The Solution</span>
+          <h2 class="case-block-heading">Crafting a Bespoke Experience</h2>
+          <p class="case-block-text">{project.solution}</p>
+        </section>
+      )}
+
+      {project.result && (
+        <section class="case-block">
+          <span class="case-block-label">04 / Impact &amp; Results</span>
+          <h2 class="case-block-heading">Measurable Outcomes</h2>
+          <p class="case-block-text">{project.result}</p>
+        </section>
+      )}
+
+      <!-- Additional Gallery Visuals if present -->
+      {project.gallery && project.gallery.length > 0 && (
+        <section class="case-block" style="border-bottom: none;">
+          <span class="case-block-label">Visual Gallery</span>
+          <div class="project-gallery-grid" style="margin-top: 24px;">
+            {project.gallery.map((imgUrl: string, idx: number) => (
+              <div class="project-gallery-item">
+                <img src={imgUrl} alt={`${project.title} design frame ${idx + 1}`} loading="lazy" />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Next & Previous Project Navigation -->
+      <nav class="project-nav-bar" aria-label="Project Navigation">
+        {prevProject && (
+          <a href={`/work/${prevProject.slug}`} class="project-nav-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>PREV: {prevProject.title}</span>
+          </a>
+        )}
+        <a href="/work" class="project-nav-link" style="color: var(--gold); font-size: 11px; letter-spacing: 2px;">
+          ALL PROJECTS
+        </a>
+        {nextProject && (
+          <a href={`/work/${nextProject.slug}`} class="project-nav-link">
+            <span>NEXT: {nextProject.title}</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        )}
+      </nav>
+    </article>
+  </main>
+
+  <!-- Marquee Ticker -->
+  <Marquee />
+
+  <!-- Big Call to Action & Netlify Contact Form -->
+  <NetlifyContact />
+</Layout>

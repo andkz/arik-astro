@@ -1,0 +1,117 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Marquee from '../../components/Marquee.astro';
+import NetlifyContact from '../../components/NetlifyContact.astro';
+import { getPosts } from '../../lib/sanity';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post, index) => {
+    const prevPost = index > 0 ? posts[index - 1] : posts[posts.length - 1];
+    const nextPost = index < posts.length - 1 ? posts[index + 1] : posts[0];
+    return {
+      params: { slug: post.slug },
+      props: { post, prevPost, nextPost },
+    };
+  });
+}
+
+const { post, prevPost, nextPost } = Astro.props;
+---
+
+<Layout 
+  title={`${post.title} — Blog by Arik Andersson`}
+  description={post.excerpt || `Read the latest insights from Arik Andersson.`}
+  activePage="blog"
+>
+  <main class="container">
+    <article class="article-container">
+      <!-- Article Header -->
+      <header class="article-header">
+        <a href="/blog" class="back-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>BACK TO BLOG</span>
+        </a>
+
+        <div class="article-meta-row">
+          <span class="detail-badge">{post.category}</span>
+          <span class="detail-meta-text">{post.publishedAt}</span>
+          {post.readTime && <span class="detail-meta-text">• {post.readTime}</span>}
+        </div>
+
+        <h1 class="detail-title">{post.title}</h1>
+
+        <div class="article-author-chip">
+          <img src="/images/hero-portrait.png" alt="Arik Andersson avatar" />
+          <span>Written by Arik Andersson</span>
+        </div>
+      </header>
+
+      <!-- Featured Image -->
+      <div class="article-cover-wrap">
+        <img 
+          src={post.mainImage} 
+          alt={post.title} 
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+
+      <!-- Article Editorial Content -->
+      <div class="article-body">
+        {post.excerpt && (
+          <p style="font-size: 20px; line-height: 1.7; color: var(--gold); margin-bottom: 32px;">
+            {post.excerpt}
+          </p>
+        )}
+
+        <Fragment set:html={post.content} />
+      </div>
+
+      <!-- Author Bio Footer Box -->
+      <div class="article-footer-card">
+        <img src="/images/hero-portrait.png" alt="Arik Andersson" class="article-footer-avatar" />
+        <div class="article-footer-info">
+          <h4>Arik Andersson</h4>
+          <p>
+            Independent UI/UX Designer &amp; Framer Developer crafting high-converting, aesthetic web experiences for ambitious digital brands worldwide.
+          </p>
+        </div>
+      </div>
+
+      <!-- Next & Previous Article Navigation -->
+      <nav class="project-nav-bar" aria-label="Article Navigation">
+        {prevPost && (
+          <a href={`/blog/${prevPost.slug}`} class="project-nav-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>PREV: {prevPost.title.length > 25 ? prevPost.title.slice(0, 25) + '...' : prevPost.title}</span>
+          </a>
+        )}
+        <a href="/blog" class="project-nav-link" style="color: var(--gold); font-size: 11px; letter-spacing: 2px;">
+          ALL POSTS
+        </a>
+        {nextPost && (
+          <a href={`/blog/${nextPost.slug}`} class="project-nav-link">
+            <span>NEXT: {nextPost.title.length > 25 ? nextPost.title.slice(0, 25) + '...' : nextPost.title}</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        )}
+      </nav>
+    </article>
+  </main>
+
+  <!-- Marquee Ticker -->
+  <Marquee />
+
+  <!-- Big Call to Action & Netlify Contact Form -->
+  <NetlifyContact />
+</Layout>

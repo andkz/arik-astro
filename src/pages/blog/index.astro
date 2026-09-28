@@ -1,0 +1,95 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Marquee from '../../components/Marquee.astro';
+import NetlifyContact from '../../components/NetlifyContact.astro';
+import { getPosts } from '../../lib/sanity';
+
+const posts = await getPosts();
+// Extract unique categories
+const categories = ['All', ...new Set(posts.map(p => p.category).filter(Boolean))];
+---
+
+<Layout 
+  title="Blog — Arik Andersson" 
+  description="Insights, thoughts, and trends in web design, development, and SEO."
+  activePage="blog"
+>
+  <!-- Blog Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-title">Blog</h1>
+      <p class="page-subtitle">
+        Insights, thoughts, and trends in web design, development, and SEO.
+      </p>
+
+      <!-- Category Filter Pills -->
+      <div class="filter-pills" id="category-filters">
+        {categories.map((cat, idx) => (
+          <button 
+            class={`filter-pill ${idx === 0 ? 'active' : ''}`} 
+            data-filter={cat === 'All' ? 'all' : cat}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+  </header>
+
+  <!-- Blog Posts Grid -->
+  <main class="container">
+    <div class="blog-grid" id="blog-grid" style="padding-bottom: 100px;">
+      {posts.map((post) => (
+        <a 
+          href={`/blog/${post.slug}`} 
+          class="blog-card" 
+          data-category={post.category}
+          style="text-decoration: none; color: inherit;"
+        >
+          <div class="blog-image-box">
+            <img src={post.mainImage} alt={post.title} loading="lazy" />
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-meta">
+              <span class="blog-date">{post.publishedAt}</span>
+              <span class="blog-category-tag">{post.category}</span>
+            </div>
+            <h2 class="blog-title">{post.title}</h2>
+            <p class="blog-excerpt">{post.excerpt}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+
+  <!-- Marquee Ticker -->
+  <Marquee />
+
+  <!-- Big Call to Action & Netlify Contact Form -->
+  <NetlifyContact />
+</Layout>
+
+<script>
+  // Filter pill interaction
+  const pills = document.querySelectorAll('#category-filters .filter-pill');
+  const cards = document.querySelectorAll('#blog-grid .blog-card');
+
+  pills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      pills.forEach((p) => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      const filter = pill.getAttribute('data-filter');
+
+      cards.forEach((card) => {
+        const cardEl = card as HTMLElement;
+        const category = cardEl.getAttribute('data-category');
+        if (filter === 'all' || category === filter) {
+          cardEl.style.display = 'flex';
+        } else {
+          cardEl.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

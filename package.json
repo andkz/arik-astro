@@ -1,0 +1,16 @@
+{
+  "name": "arik-astro-portfolio",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^4.8.0",
+    "@sanity/client": "^6.15.22",
+    "@sanity/image-url": "^1.0.2"
+  }
+}

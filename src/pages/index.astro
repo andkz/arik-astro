@@ -1,0 +1,429 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Marquee from '../components/Marquee.astro';
+import NetlifyContact from '../components/NetlifyContact.astro';
+import { getProjects } from '../lib/sanity';
+
+const allProjects = await getProjects();
+// Homepage features the first 4 projects
+const featuredProjects = allProjects.slice(0, 4);
+---
+
+<Layout title="Arik Andersson — Web Designer & Developer" activePage="home">
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="container">
+      <h1 class="hero-title">
+        <span class="hero-title-main">Web Designer</span>
+        <span class="hero-title-sub">&amp; Developer</span>
+      </h1>
+
+      <div class="hero-portrait-wrapper">
+        <div class="hero-portrait-glow"></div>
+        <img 
+          src="/images/hero-portrait.png" 
+          alt="Arik Andersson portrait" 
+          class="hero-portrait-img"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+
+      <p class="hero-tagline">
+        Premium Web Design, Development, and SEO services to help your business stand out.
+      </p>
+
+      <a href="#services" class="btn-services-scroll">
+        <span class="scroll-circle-arrow">
+          <svg viewBox="0 0 24 24">
+            <path d="M11 4v12.17l-5.59-5.59L4 12l8 8 8-8-1.41-1.41L13 16.17V4h-2z" fill="#dac5a7"/>
+          </svg>
+        </span>
+        <span>MY SERVICES</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Partner Logos Row -->
+  <section class="logos-section">
+    <div class="container">
+      <div class="logos-grid">
+        <div class="client-logo-item">
+          <svg style="width: 140px; height: 20px;"><use href="#svg-1262485426_3863"/></svg>
+        </div>
+        <div class="client-logo-item">
+          <svg style="width: 32px; height: 28px;"><use href="#svg-1966805348_375"/></svg>
+        </div>
+        <div class="client-logo-item">
+          <svg style="width: 130px; height: 26px;"><use href="#svg-1133437655_2780"/></svg>
+        </div>
+        <div class="client-logo-item">
+          <svg style="width: 90px; height: 24px;"><use href="#svg871843435_677"/></svg>
+        </div>
+        <div class="client-logo-item">
+          <svg style="width: 46px; height: 30px;"><use href="#svg2133325238_1714"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="services-section">
+    <div class="container">
+      <div class="services-grid">
+        <!-- Card 01 -->
+        <div class="service-card">
+          <div class="service-top">
+            <span class="service-num">01</span>
+            <h3 class="service-title">WEB DESIGN</h3>
+            <p class="service-desc">
+              Visually stunning web designs that captivate your audience by blending your brand voice and customer needs.
+            </p>
+          </div>
+          <a href="/work" class="service-link">
+            <span class="icon-arrow-circle">
+              <svg viewBox="0 0 18 18"><use href="#svg1845496161_258"/></svg>
+            </span>
+            <span>ABOUT WEB DESIGN</span>
+          </a>
+        </div>
+
+        <!-- Card 02 -->
+        <div class="service-card">
+          <div class="service-top">
+            <span class="service-num">02</span>
+            <h3 class="service-title">DEVELOPMENT</h3>
+            <p class="service-desc">
+              Get custom web development solutions that are tailored to your specifications, designed to deliver a flawless user experience.
+            </p>
+          </div>
+          <a href="/work" class="service-link">
+            <span class="icon-arrow-circle">
+              <svg viewBox="0 0 18 18"><use href="#svg1845496161_258"/></svg>
+            </span>
+            <span>ABOUT DEVELOPMENT</span>
+          </a>
+        </div>
+
+        <!-- Card 03 -->
+        <div class="service-card">
+          <div class="service-top">
+            <span class="service-num">03</span>
+            <h3 class="service-title">CONTENT &amp; SEO</h3>
+            <p class="service-desc">
+              Proven SEO strategies that enhance your online performance, bringing you to the forefront of organic search results.
+            </p>
+          </div>
+          <a href="/blog" class="service-link">
+            <span class="icon-arrow-circle">
+              <svg viewBox="0 0 18 18"><use href="#svg1845496161_258"/></svg>
+            </span>
+            <span>ABOUT SEO</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Selected Work Section -->
+  <section id="work" class="work-section">
+    <div class="container">
+      <div class="work-header">
+        <h2 class="work-title">Selected Work</h2>
+        <a href="/work" class="btn-see-all">
+          <svg style="width: 14px; height: 14px;"><use href="#svg1845496161_258"/></svg>
+          <span>SEE ALL</span>
+        </a>
+      </div>
+
+      <div class="work-grid">
+        {featuredProjects.map((project) => (
+          <a href={`/work/${project.slug}`} class="work-item" style="text-decoration: none; color: inherit;">
+            <div class="work-image-box">
+              <img src={project.mainImage} alt={`${project.title} project showcase`} loading="lazy" />
+            </div>
+            <div class="work-meta">
+              <h4 class="work-name">{project.title}</h4>
+              <span class="work-category">{project.category}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- The Process (Timeline) Section -->
+  <section id="process" class="process-section">
+    <div class="container">
+      <div class="section-intro-center">
+        <span class="eyebrow">THE PROCESS</span>
+        <h2 class="process-title-main">Your Website</h2>
+        <span class="process-title-italic">in 5 steps</span>
+        <p class="section-desc-center">
+          Our process ensures that we create a website tailored to your business needs.
+        </p>
+      </div>
+
+      <div class="timeline-container">
+        <div class="timeline-spine"></div>
+
+        <!-- Step 01 (Right side) -->
+        <div class="timeline-row right-side">
+          <div class="timeline-empty"></div>
+          <div class="timeline-node-wrap">
+            <div class="timeline-node">01</div>
+          </div>
+          <div class="timeline-card">
+            <div class="timeline-card-header">
+              <span class="card-category">DO WE MATCH?</span>
+              <span class="duration-badge">2 HOURS</span>
+            </div>
+            <h3 class="card-heading">DISCOVERY CALL</h3>
+            <p class="card-paragraph">
+              Before we start, we determine if and how I can help you. What are your requirements for your new website? Why do you need a new website? What goals do you have, and what problems can we solve with a new website?
+            </p>
+            <ul class="card-checklist">
+              <li>We get to know each other better</li>
+              <li>Determine how I can best assist you</li>
+              <li>Understand the goals you have for your website</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Step 02 (Left side) -->
+        <div class="timeline-row left-side">
+          <div class="timeline-card">
+            <div class="timeline-card-header">
+              <span class="card-category">WE NEED A PLAN</span>
+              <span class="duration-badge">2 WEEKS</span>
+            </div>
+            <h3 class="card-heading">CONCEPT &amp; STRATEGY</h3>
+            <p class="card-paragraph">
+              Together, we develop a strategy that successfully combines your goals with the needs of your target audience. Based on this concept, I create the first wireframes and an interactive prototype. This provides us with a very good impression of the website and the user interface.
+            </p>
+            <ul class="card-checklist">
+              <li>UX Design</li>
+              <li>Wireframes</li>
+              <li>Interactive Prototype</li>
+            </ul>
+          </div>
+          <div class="timeline-node-wrap">
+            <div class="timeline-node">02</div>
+          </div>
+          <div class="timeline-empty"></div>
+        </div>
+
+        <!-- Step 03 (Right side) -->
+        <div class="timeline-row right-side">
+          <div class="timeline-empty"></div>
+          <div class="timeline-node-wrap">
+            <div class="timeline-node">03</div>
+          </div>
+          <div class="timeline-card">
+            <div class="timeline-card-header">
+              <span class="card-category">SOME MAGIC</span>
+              <span class="duration-badge">2 WEEKS</span>
+            </div>
+            <h3 class="card-heading">WEB DESIGN</h3>
+            <p class="card-paragraph">
+              Now comes the magic. Based on the previously developed concept, I create a high-end screen design perfectly tailored to your brand. A web design that sets you apart from your competition, fits your target audience ideally, and provides an excellent user experience.
+            </p>
+            <ul class="card-checklist">
+              <li>High-end web design tailored to your brand</li>
+              <li>Interactive prototype of the design</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Step 04 (Left side) -->
+        <div class="timeline-row left-side">
+          <div class="timeline-card">
+            <div class="timeline-card-header">
+              <span class="card-category">MORE MAGIC</span>
+              <span class="duration-badge">2 WEEKS</span>
+            </div>
+            <h3 class="card-heading">DEVELOPMENT</h3>
+            <p class="card-paragraph">
+              In this step, the approved design is transformed into a responsive, animated, and modern Framer website. Built with modular components, interactive states, and CMS capabilities.
+            </p>
+            <ul class="card-checklist">
+              <li>Custom framer website</li>
+              <li>Modular web design systems</li>
+              <li>CMS integration</li>
+            </ul>
+          </div>
+          <div class="timeline-node-wrap">
+            <div class="timeline-node">04</div>
+          </div>
+          <div class="timeline-empty"></div>
+        </div>
+
+        <!-- Step 05 (Right side) -->
+        <div class="timeline-row right-side">
+          <div class="timeline-empty"></div>
+          <div class="timeline-node-wrap">
+            <div class="timeline-node">05</div>
+          </div>
+          <div class="timeline-card">
+            <div class="timeline-card-header">
+              <span class="card-category">READY TO GO</span>
+              <span class="duration-badge">2 HOURS</span>
+            </div>
+            <h3 class="card-heading">WEBSITE ONBOARDING</h3>
+            <p class="card-paragraph">
+              In a personal onboarding session, I will show you how to easily update and manage your new website. You receive personalized video walkthroughs and complete peace of mind.
+            </p>
+            <ul class="card-checklist">
+              <li>Personal workshop</li>
+              <li>Personalized video tutorials</li>
+              <li>Edit text and images directly on your website</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="testimonials-section">
+    <div class="container">
+      <div class="testimonials-header">
+        <span class="testimonials-title-sans">What my</span>
+        <span class="testimonials-title-serif">clients say</span>
+        <p class="testimonials-sub">
+          See what my clients have to say about working with me and the results I helped them achieve.
+        </p>
+      </div>
+
+      <div class="testimonials-grid">
+        <!-- Review 1: Matthew Smith -->
+        <div class="testimonial-card">
+          <div class="testimonial-logo">
+            <svg style="width: 32px; height: 22px;"><use href="#svg1758212889_2465"/></svg>
+          </div>
+          <h4 class="testimonial-quote-title">
+            Amazing Results with Arik's Premium Web Design Services.
+          </h4>
+          <p class="testimonial-quote-body">
+            Arik is a top notch web designer who created a stunning website for my business. He was attentive to my needs and provided excellent customer service throughout the entire process. I highly recommend his services.
+          </p>
+          <div class="testimonial-author">
+            <img src="/images/avatar-matthew.png" alt="Matthew Smith" class="testimonial-avatar" loading="lazy" />
+            <div class="author-info">
+              <span class="author-name">MATTHEW SMITH</span>
+              <span class="author-company">Sonic</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2: Josh Kim -->
+        <div class="testimonial-card">
+          <div class="testimonial-logo">
+            <svg style="width: 28px; height: 24px;"><use href="#svg-1966805348_375"/></svg>
+          </div>
+          <h4 class="testimonial-quote-title">
+            Expert Framer and SEO Services: Excellent Work, Great Results.
+          </h4>
+          <p class="testimonial-quote-body">
+            Working with Arik on my website redesign was a fantastic experience. He was able to take my vision and turn it into a beautiful and functional website. His attention to detail and creative approach is unmatched. I couldn't be happier with the end result.
+          </p>
+          <div class="testimonial-author">
+            <img src="/images/avatar-josh.png" alt="Josh Kim" class="testimonial-avatar" loading="lazy" />
+            <div class="author-info">
+              <span class="author-name">JOSH KIM</span>
+              <span class="author-company">Solar</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3: Andrea Lee -->
+        <div class="testimonial-card">
+          <div class="testimonial-logo">
+            <svg style="width: 120px; height: 26px;"><use href="#svg-230836560_12736"/></svg>
+          </div>
+          <h4 class="testimonial-quote-title">
+            Professional, Collaborative Web Design Experience with Arik.
+          </h4>
+          <p class="testimonial-quote-body">
+            Arik is an exceptional web designer with a keen eye for aesthetics and user experience. He transformed our outdated website into a sleek, modern platform that exceeded our expectations.
+          </p>
+          <div class="testimonial-author">
+            <img src="/images/avatar-andrea.png" alt="Andrea Lee" class="testimonial-avatar" loading="lazy" />
+            <div class="author-info">
+              <span class="author-name">ANDREA LEE</span>
+              <span class="author-company">Stars</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 4: Catharine Davis -->
+        <div class="testimonial-card">
+          <div class="testimonial-logo">
+            <svg style="width: 140px; height: 18px;"><use href="#svg-1262485426_3863"/></svg>
+          </div>
+          <h4 class="testimonial-quote-title">
+            Web Design and Content Solutions: Stand Out from the Crowd.
+          </h4>
+          <p class="testimonial-quote-body">
+            Working with Arik was a breeze. From the initial discovery call to final delivery, his process was smooth, transparent, and remarkably fast. Our conversions increased noticeably after launch.
+          </p>
+          <div class="testimonial-author">
+            <img src="/images/avatar-catharine.png" alt="Catharine Davis" class="testimonial-avatar" loading="lazy" />
+            <div class="author-info">
+              <span class="author-name">CATHARINE DAVIS</span>
+              <span class="author-company">Supersonic</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 5: Andreas Thompson -->
+        <div class="testimonial-card">
+          <div class="testimonial-logo">
+            <svg style="width: 85px; height: 22px;"><use href="#svg871843435_677"/></svg>
+          </div>
+          <h4 class="testimonial-quote-title">
+            Expertise in Web Design: Second to None with Arik.
+          </h4>
+          <p class="testimonial-quote-body">
+            Arik brought fresh perspectives and unmatched technical craftsmanship to our website. His mastery of Framer and clean modern design language set our company ahead of competitors.
+          </p>
+          <div class="testimonial-author">
+            <img src="/images/avatar-andreas.png" alt="Andreas Thompson" class="testimonial-avatar" loading="lazy" />
+            <div class="author-info">
+              <span class="author-name">ANDREAS THOMPSON</span>
+              <span class="author-company">Design Inc.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 6: Liam Chen -->
+        <div class="testimonial-card">
+          <div class="testimonial-logo">
+            <svg style="width: 70px; height: 26px;"><use href="#svg835779564_1051"/></svg>
+          </div>
+          <h4 class="testimonial-quote-title">
+            High-Quality Web Design: Exceptional Attention to Detail with Arik.
+          </h4>
+          <p class="testimonial-quote-body">
+            I was blown away by Arik's attention to typography, fluid responsiveness, and subtle micro-animations. The website feels alive and premium. Worth every penny.
+          </p>
+          <div class="testimonial-author">
+            <img src="/images/avatar-liam.png" alt="Liam Chen" class="testimonial-avatar" loading="lazy" />
+            <div class="author-info">
+              <span class="author-name">LIAM CHEN</span>
+              <span class="author-company">Design Solutions</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee Ticker -->
+  <Marquee />
+
+  <!-- Netlify Contact CTA -->
+  <NetlifyContact />
+</Layout>

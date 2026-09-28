@@ -1,0 +1,48 @@
+---
+import SvgSymbols from '../components/SvgSymbols.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  activePage?: 'home' | 'services' | 'work' | 'about' | 'blog';
+}
+
+const {
+  title = 'Arik Andersson — Web Designer & Developer',
+  description = 'Premium Web Design, Development, and SEO services to help your business stand out.',
+  activePage = 'home',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content="/images/og-image.jpg" />
+</head>
+<body>
+  <!-- Grain Overlay -->
+  <div class="noise-overlay"></div>
+
+  <!-- SVG Global Symbol Store -->
+  <SvgSymbols />
+
+  <!-- Navigation Bar -->
+  <Navbar activePage={activePage} />
+
+  <!-- Page Content Slot -->
+  <slot />
+
+  <!-- Global Footer -->
+  <Footer />
+</body>
+</html>
