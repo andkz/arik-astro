@@ -6,7 +6,7 @@ export default defineConfig({
   name: 'default',
   title: 'Arik Portfolio CMS',
 
-  projectId: 'TWOJ_PROJECT_ID', // Wpisz swój Project ID z https://sanity.io/manage
+  projectId: 'qjkjugu2',
   dataset: 'production',
 
   plugins: [structureTool()],

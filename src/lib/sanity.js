@@ -1,9 +1,17 @@
 import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 
-// Pobierz z process.env lub import.meta.env (Astro)
-export const projectId = import.meta.env.SANITY_PROJECT_ID || '';
-export const dataset = import.meta.env.SANITY_DATASET || 'production';
+// Pobierz z import.meta.env (Astro) lub process.env (Node)
+export const projectId = 
+  (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.SANITY_PROJECT_ID) ||
+  (typeof process !== 'undefined' && process.env && process.env.SANITY_PROJECT_ID) ||
+  'qjkjugu2';
+
+export const dataset = 
+  (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.SANITY_DATASET) ||
+  (typeof process !== 'undefined' && process.env && process.env.SANITY_DATASET) ||
+  'production';
+
 export const apiVersion = '2024-01-01';
 
 export const isConfigured = Boolean(projectId && projectId.trim() !== '');
