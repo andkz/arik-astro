@@ -1,6 +1,11 @@
 [build]
-  command = "npm run build"
+  command = "npm run build && cd sanity && npm install --legacy-peer-deps && npx sanity build ../dist/admin -y"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200

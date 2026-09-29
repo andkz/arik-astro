@@ -5,6 +5,7 @@ import {schemaTypes} from './schemas'
 export default defineConfig({
   name: 'default',
   title: 'Arik Portfolio CMS',
+  basePath: '/admin',
 
   projectId: 'gkzj0x76',
   dataset: 'production',
