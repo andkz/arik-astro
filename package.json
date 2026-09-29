@@ -6,6 +6,8 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "build:cms": "cd sanity && npx sanity build ../public/admin -y",
+    "deploy": "npm run build && npx netlify deploy --prod --dir=dist",
     "preview": "astro preview"
   },
   "dependencies": {

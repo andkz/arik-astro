@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build && cd sanity && npm install --legacy-peer-deps && npx sanity build ../dist/admin -y"
+  command = "npm run build"
   publish = "dist"
 
 [build.environment]
