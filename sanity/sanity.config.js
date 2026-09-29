@@ -6,7 +6,7 @@ export default defineConfig({
   name: 'default',
   title: 'Arik Portfolio CMS',
 
-  projectId: 'qjkjugu2',
+  projectId: 'gkzj0x76',
   dataset: 'production',
 
   plugins: [structureTool()],

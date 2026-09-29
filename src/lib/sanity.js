@@ -5,7 +5,7 @@ import imageUrlBuilder from '@sanity/image-url';
 export const projectId = 
   (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.SANITY_PROJECT_ID) ||
   (typeof process !== 'undefined' && process.env && process.env.SANITY_PROJECT_ID) ||
-  'qjkjugu2';
+  'gkzj0x76';
 
 export const dataset = 
   (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.SANITY_DATASET) ||
