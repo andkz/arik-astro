@@ -46,7 +46,7 @@ const categories = ['All', ...new Set(projects.map(p => p.category).filter(Boole
           style="text-decoration: none; color: inherit;"
         >
           <div class="work-image-box">
-            <img src={project.mainImage} alt={`${project.title} project showcase`} loading="lazy" />
+            <img src={project.mainImage} alt={`${project.title} project showcase`} width="1200" height="900" loading="lazy" />
           </div>
           <div class="work-meta">
             <h4 class="work-name">{project.title}</h4>

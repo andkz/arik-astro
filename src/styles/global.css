@@ -61,8 +61,8 @@
   
   --gold: #dac5a7;
   --gold-light: #edd6b6;
-  --gold-muted: rgba(218, 197, 167, 0.65);
-  --gold-dim: rgba(218, 197, 167, 0.4);
+  --gold-muted: rgba(218, 197, 167, 0.72);
+  --gold-dim: rgba(218, 197, 167, 0.62);
   --gold-border: rgba(218, 197, 167, 0.12);
   --gold-border-hover: rgba(218, 197, 167, 0.35);
   --gold-badge-bg: rgba(218, 197, 167, 0.07);
@@ -337,6 +337,7 @@ img {
   z-index: 1;
   width: 100%;
   height: auto;
+  aspect-ratio: 1377 / 1712;
   border-radius: 200px 200px 40px 40px;
   object-fit: cover;
   filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.6));
@@ -871,6 +872,11 @@ img {
   margin-bottom: 70px;
 }
 
+.testimonials-heading {
+  margin: 0;
+  font-weight: inherit;
+}
+
 .testimonials-title-sans {
   font-family: var(--font-sans);
   font-size: clamp(48px, 7vw, 92px);
@@ -1073,6 +1079,11 @@ img {
   text-transform: uppercase;
   color: var(--gold-muted);
   margin-bottom: 20px;
+}
+
+.cta-heading {
+  margin: 0;
+  font-weight: inherit;
 }
 
 .cta-heading-main {

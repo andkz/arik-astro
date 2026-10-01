@@ -45,7 +45,7 @@ const { post, prevPost, nextPost } = Astro.props;
         <h1 class="detail-title">{post.title}</h1>
 
         <div class="article-author-chip">
-          <img src="/images/hero-portrait.png" alt="Arik Andersson avatar" />
+          <img src="/images/hero-portrait.webp" alt="Arik Andersson avatar" width="36" height="36" />
           <span>Written by Arik Andersson</span>
         </div>
       </header>
@@ -55,6 +55,8 @@ const { post, prevPost, nextPost } = Astro.props;
         <img 
           src={post.mainImage} 
           alt={post.title} 
+          width="1200"
+          height="720"
           loading="eager"
           fetchpriority="high"
         />

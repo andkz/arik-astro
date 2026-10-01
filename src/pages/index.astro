@@ -10,6 +10,7 @@ const featuredProjects = allProjects.slice(0, 4);
 ---
 
 <Layout title="Arik Andersson — Web Designer & Developer" activePage="home">
+  <main id="main-content">
   <!-- Hero Section -->
   <header class="hero-section">
     <div class="container">
@@ -21,9 +22,11 @@ const featuredProjects = allProjects.slice(0, 4);
       <div class="hero-portrait-wrapper">
         <div class="hero-portrait-glow"></div>
         <img 
-          src="/images/hero-portrait.png" 
+          src="/images/hero-portrait.webp" 
           alt="Arik Andersson portrait" 
           class="hero-portrait-img"
+          width="1377"
+          height="1712"
           loading="eager"
           fetchpriority="high"
         />
@@ -75,7 +78,7 @@ const featuredProjects = allProjects.slice(0, 4);
         <div class="service-card">
           <div class="service-top">
             <span class="service-num">01</span>
-            <h3 class="service-title">WEB DESIGN</h3>
+            <h2 class="service-title">WEB DESIGN</h2>
             <p class="service-desc">
               Visually stunning web designs that captivate your audience by blending your brand voice and customer needs.
             </p>
@@ -92,7 +95,7 @@ const featuredProjects = allProjects.slice(0, 4);
         <div class="service-card">
           <div class="service-top">
             <span class="service-num">02</span>
-            <h3 class="service-title">DEVELOPMENT</h3>
+            <h2 class="service-title">DEVELOPMENT</h2>
             <p class="service-desc">
               Get custom web development solutions that are tailored to your specifications, designed to deliver a flawless user experience.
             </p>
@@ -109,7 +112,7 @@ const featuredProjects = allProjects.slice(0, 4);
         <div class="service-card">
           <div class="service-top">
             <span class="service-num">03</span>
-            <h3 class="service-title">CONTENT &amp; SEO</h3>
+            <h2 class="service-title">CONTENT &amp; SEO</h2>
             <p class="service-desc">
               Proven SEO strategies that enhance your online performance, bringing you to the forefront of organic search results.
             </p>
@@ -140,10 +143,10 @@ const featuredProjects = allProjects.slice(0, 4);
         {featuredProjects.map((project) => (
           <a href={`/work/${project.slug}`} class="work-item" style="text-decoration: none; color: inherit;">
             <div class="work-image-box">
-              <img src={project.mainImage} alt={`${project.title} project showcase`} loading="lazy" />
+              <img src={project.mainImage} alt={`${project.title} project showcase`} width="1200" height="900" loading="lazy" />
             </div>
             <div class="work-meta">
-              <h4 class="work-name">{project.title}</h4>
+              <h3 class="work-name">{project.title}</h3>
               <span class="work-category">{project.category}</span>
             </div>
           </a>
@@ -289,8 +292,10 @@ const featuredProjects = allProjects.slice(0, 4);
   <section id="testimonials" class="testimonials-section">
     <div class="container">
       <div class="testimonials-header">
-        <span class="testimonials-title-sans">What my</span>
-        <span class="testimonials-title-serif">clients say</span>
+        <h2 class="testimonials-heading">
+          <span class="testimonials-title-sans">What my</span>
+          <span class="testimonials-title-serif">clients say</span>
+        </h2>
         <p class="testimonials-sub">
           See what my clients have to say about working with me and the results I helped them achieve.
         </p>
@@ -302,14 +307,14 @@ const featuredProjects = allProjects.slice(0, 4);
           <div class="testimonial-logo">
             <svg style="width: 32px; height: 22px;"><use href="#svg1758212889_2465"/></svg>
           </div>
-          <h4 class="testimonial-quote-title">
+          <h3 class="testimonial-quote-title">
             Amazing Results with Arik's Premium Web Design Services.
-          </h4>
+          </h3>
           <p class="testimonial-quote-body">
             Arik is a top notch web designer who created a stunning website for my business. He was attentive to my needs and provided excellent customer service throughout the entire process. I highly recommend his services.
           </p>
           <div class="testimonial-author">
-            <img src="/images/avatar-matthew.png" alt="Matthew Smith" class="testimonial-avatar" loading="lazy" />
+            <img src="/images/avatar-matthew.png" alt="Matthew Smith" class="testimonial-avatar" width="120" height="120" loading="lazy" />
             <div class="author-info">
               <span class="author-name">MATTHEW SMITH</span>
               <span class="author-company">Sonic</span>
@@ -322,14 +327,14 @@ const featuredProjects = allProjects.slice(0, 4);
           <div class="testimonial-logo">
             <svg style="width: 28px; height: 24px;"><use href="#svg-1966805348_375"/></svg>
           </div>
-          <h4 class="testimonial-quote-title">
+          <h3 class="testimonial-quote-title">
             Expert Framer and SEO Services: Excellent Work, Great Results.
-          </h4>
+          </h3>
           <p class="testimonial-quote-body">
             Working with Arik on my website redesign was a fantastic experience. He was able to take my vision and turn it into a beautiful and functional website. His attention to detail and creative approach is unmatched. I couldn't be happier with the end result.
           </p>
           <div class="testimonial-author">
-            <img src="/images/avatar-josh.png" alt="Josh Kim" class="testimonial-avatar" loading="lazy" />
+            <img src="/images/avatar-josh.png" alt="Josh Kim" class="testimonial-avatar" width="120" height="120" loading="lazy" />
             <div class="author-info">
               <span class="author-name">JOSH KIM</span>
               <span class="author-company">Solar</span>
@@ -342,14 +347,14 @@ const featuredProjects = allProjects.slice(0, 4);
           <div class="testimonial-logo">
             <svg style="width: 120px; height: 26px;"><use href="#svg-230836560_12736"/></svg>
           </div>
-          <h4 class="testimonial-quote-title">
+          <h3 class="testimonial-quote-title">
             Professional, Collaborative Web Design Experience with Arik.
-          </h4>
+          </h3>
           <p class="testimonial-quote-body">
             Arik is an exceptional web designer with a keen eye for aesthetics and user experience. He transformed our outdated website into a sleek, modern platform that exceeded our expectations.
           </p>
           <div class="testimonial-author">
-            <img src="/images/avatar-andrea.png" alt="Andrea Lee" class="testimonial-avatar" loading="lazy" />
+            <img src="/images/avatar-andrea.png" alt="Andrea Lee" class="testimonial-avatar" width="120" height="120" loading="lazy" />
             <div class="author-info">
               <span class="author-name">ANDREA LEE</span>
               <span class="author-company">Stars</span>
@@ -362,14 +367,14 @@ const featuredProjects = allProjects.slice(0, 4);
           <div class="testimonial-logo">
             <svg style="width: 140px; height: 18px;"><use href="#svg-1262485426_3863"/></svg>
           </div>
-          <h4 class="testimonial-quote-title">
+          <h3 class="testimonial-quote-title">
             Web Design and Content Solutions: Stand Out from the Crowd.
-          </h4>
+          </h3>
           <p class="testimonial-quote-body">
             Working with Arik was a breeze. From the initial discovery call to final delivery, his process was smooth, transparent, and remarkably fast. Our conversions increased noticeably after launch.
           </p>
           <div class="testimonial-author">
-            <img src="/images/avatar-catharine.png" alt="Catharine Davis" class="testimonial-avatar" loading="lazy" />
+            <img src="/images/avatar-catharine.png" alt="Catharine Davis" class="testimonial-avatar" width="120" height="120" loading="lazy" />
             <div class="author-info">
               <span class="author-name">CATHARINE DAVIS</span>
               <span class="author-company">Supersonic</span>
@@ -382,14 +387,14 @@ const featuredProjects = allProjects.slice(0, 4);
           <div class="testimonial-logo">
             <svg style="width: 85px; height: 22px;"><use href="#svg871843435_677"/></svg>
           </div>
-          <h4 class="testimonial-quote-title">
-            Expertise in Web Design: Second to None with Arik.
-          </h4>
+          <h3 class="testimonial-quote-title">
+            Expertize in Web Design: Second to None with Arik.
+          </h3>
           <p class="testimonial-quote-body">
             Arik brought fresh perspectives and unmatched technical craftsmanship to our website. His mastery of Framer and clean modern design language set our company ahead of competitors.
           </p>
           <div class="testimonial-author">
-            <img src="/images/avatar-andreas.png" alt="Andreas Thompson" class="testimonial-avatar" loading="lazy" />
+            <img src="/images/avatar-andreas.png" alt="Andreas Thompson" class="testimonial-avatar" width="120" height="120" loading="lazy" />
             <div class="author-info">
               <span class="author-name">ANDREAS THOMPSON</span>
               <span class="author-company">Design Inc.</span>
@@ -402,14 +407,14 @@ const featuredProjects = allProjects.slice(0, 4);
           <div class="testimonial-logo">
             <svg style="width: 70px; height: 26px;"><use href="#svg835779564_1051"/></svg>
           </div>
-          <h4 class="testimonial-quote-title">
+          <h3 class="testimonial-quote-title">
             High-Quality Web Design: Exceptional Attention to Detail with Arik.
-          </h4>
+          </h3>
           <p class="testimonial-quote-body">
             I was blown away by Arik's attention to typography, fluid responsiveness, and subtle micro-animations. The website feels alive and premium. Worth every penny.
           </p>
           <div class="testimonial-author">
-            <img src="/images/avatar-liam.png" alt="Liam Chen" class="testimonial-avatar" loading="lazy" />
+            <img src="/images/avatar-liam.png" alt="Liam Chen" class="testimonial-avatar" width="120" height="120" loading="lazy" />
             <div class="author-info">
               <span class="author-name">LIAM CHEN</span>
               <span class="author-company">Design Solutions</span>
@@ -426,4 +431,5 @@ const featuredProjects = allProjects.slice(0, 4);
 
   <!-- Netlify Contact CTA -->
   <NetlifyContact />
+  </main>
 </Layout>

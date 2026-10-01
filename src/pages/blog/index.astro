@@ -47,7 +47,7 @@ const categories = ['All', ...new Set(posts.map(p => p.category).filter(Boolean)
           style="text-decoration: none; color: inherit;"
         >
           <div class="blog-image-box">
-            <img src={post.mainImage} alt={post.title} loading="lazy" />
+            <img src={post.mainImage} alt={post.title} width="1200" height="720" loading="lazy" />
           </div>
           <div class="blog-card-body">
             <div class="blog-meta">
